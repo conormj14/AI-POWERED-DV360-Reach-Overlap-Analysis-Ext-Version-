@@ -14,7 +14,8 @@ Click the ‘Open With Colab’ button to open a version of the notebook within 
 ### Step 2 - Generate a Gemini API Key from Google AI Studio
 
 1.  Navigate to this link: `https://aistudio-preprod.corp.google.com/app/apikey`
-2.  Click ‘Create an API Key’ and copy and paste the key as a string value to the empty `creds` variable within the model configuration cell of the notebook.
+2.  Click ‘Create an API Key’ to generate some new Gemini API Keys
+3.  Once you have generated your Gemini API keys, go to Secrets (Key symbol on left hand side of colab hamburger menu) and import your Gemini API Keys by clicking 'Gemini API Keys' and selecting the 'Import key from Google AI Studio' dropdown button. Note that each user must do this as Colab secrets are held at a user level to ensure a secure setup.
 
 ### Step 3 - Pull a DV360 Reach Overlap Report
 
