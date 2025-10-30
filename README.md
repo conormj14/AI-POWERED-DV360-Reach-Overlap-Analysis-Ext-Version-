@@ -21,7 +21,6 @@ Click the ‘Open With Colab’ button to open a version of the notebook within 
 
 ### Step 3 - Pull DV360 Reach Overlap Reports
 
-<h3><strong>Step 1 - Pull DV360s Reports</strong></h3>
 <h4>DV360 Added Reach Report</h4>
 <ol>
 <li>Within DV360 instant reporting, filter for and duplicate report id: <strong>1522380568</strong></li>
@@ -259,4 +258,4 @@ Click the ‘Open With Colab’ button to open a version of the notebook within 
 <li>Focusing on low-overlap, low-cost-per-unique-user IOs for efficient reach expansion.</li>
 </ul>
 <p>The Gemini AI insights provide a starting point, which you can refine and expand upon based on your expertise.</p>
-<p>R</p>
+
