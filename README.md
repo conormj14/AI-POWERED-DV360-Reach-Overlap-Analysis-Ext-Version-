@@ -9,7 +9,7 @@
 
 Follow these steps to run the analysis:
 
-### Step 1 - Navigate to the Colab Notebook Solution from Conor’s GitHub (DV360_Reach_Overlap_AI_Powered_Analysis_ExtVersion)
+### Step 1 - Navigate to the Colab Notebook Solution from Conor’s GitHub (Ext_Version_MU_DV360_Reach_Overlap_AI_Powered_Analysis.ipynb - This version includes media unification analysis whereas the other does not)
 
 Click the ‘Open With Colab’ button to open a version of the notebook within a colab environment.
 
