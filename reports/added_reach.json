@@ -1,0 +1,37 @@
+{
+    "metadata": {
+        "title": "aproa_added_reach_report",
+        "dataRange": {
+            "range": "CUSTOM_DATES",
+            "customStartDate": {
+                "year": " ",
+                "month": " ",
+                "day": " "
+      },    "customEndDate": {
+        "year": " ",
+        "month": " ",
+        "day": " "
+      }
+        },
+        "format": "CSV"
+    },
+    "params": {
+        "type": "REACH",
+        "groupBys": [
+            "FILTER_PARTNER_NAME",
+            "FILTER_PARTNER",
+            "FILTER_ADVERTISER_NAME",
+            "FILTER_ADVERTISER",
+            "FILTER_MEDIA_PLAN_NAME",
+            "FILTER_MEDIA_PLAN",
+            "FILTER_COUNTRY"
+        ],
+        "filters": [],
+        "metrics": [
+            "METRIC_UNIQUE_REACH_IMPRESSION_REACH_ADDED_WITH_CROSS_STACK_FCAP",
+            "METRIC_UNIQUE_REACH_IMPRESSION_REACH",
+            "METRIC_UNIQUE_REACH_IMPRESSION_REACH_COVIEWED"
+        ]  
+    },
+    "schedule": {"frequency": "ONE_TIME"}
+}

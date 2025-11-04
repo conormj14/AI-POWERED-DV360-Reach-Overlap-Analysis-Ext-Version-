@@ -1,0 +1,6 @@
+#ignoring all the environment variables as given in the .env file
+.env
+
+#ignoring client secrets file specifically
+dv_client_secrets.json
+token.pickle

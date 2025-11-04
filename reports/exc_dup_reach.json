@@ -1,0 +1,37 @@
+
+{
+    "metadata": {
+        "title": "aproa_exc_dup_reach_report",
+        "dataRange": {
+            "range": "CUSTOM_DATES",
+            "customStartDate": {
+                "year": " ",
+                "month": " ",
+                "day": " "
+      },    "customEndDate": {
+        "year": " ",
+        "month": " ",
+        "day": " "
+      }
+        },
+        "format": "CSV"
+    },
+    "params": {
+        "type": "REACH",
+        "groupBys": [
+            "FILTER_PARTNER_NAME",
+            "FILTER_PARTNER",
+            "FILTER_ADVERTISER_NAME",
+            "FILTER_ADVERTISER",
+            "FILTER_INSERTION_ORDER_NAME",
+            "FILTER_INSERTION_ORDER",
+            "FILTER_COUNTRY"
+        ],
+        "filters": [],
+        "metrics": [
+            "METRIC_VIRTUAL_PEOPLE_EXCLUSIVE_TOTAL_REACH",
+            "METRIC_VIRTUAL_PEOPLE_DUPLICATE_TOTAL_REACH"
+        ]  
+    },
+    "schedule": {"frequency": "ONE_TIME"}
+}
