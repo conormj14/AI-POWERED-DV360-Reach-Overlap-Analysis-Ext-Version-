@@ -177,7 +177,7 @@ Click the ‘Open With Colab’ button to open a version of the notebook within 
 </ol>
 <h3><strong>Step 2 - Configure the Colab Filters</strong></h3>
 <ol>
-<li>Open the <a href="https://colab.sandbox.google.com/drive/1cGfK3tspHhJZesSfTOiTVjguFYY3xFWC">Colab Notebook</a></li>
+<li>Open the <a href="[https://colab.sandbox.google.com/drive/1cGfK3tspHhJZesSfTOiTVjguFYY3xFWC](https://colab.sandbox.google.com/drive/1Y9Pj7oL5mIbBQXBntYBzG9SNWZ5kzHxE#scrollTo=nit2mkUwqTy9)">Colab Notebook</a></li>
 <li>Configure the following parameters within the Colab notebook. These parameters control how the data is processed and visualized: (<strong>NOTE: </strong>filters are case-sensitive, if the visualisations do not load check the exact spelling of the values in the Insertion Order field).</li>
 <ol>
 <li>CLIENT_NAME: <em>Optional.</em> Placeholder value for email at the end of the notebook</li>
