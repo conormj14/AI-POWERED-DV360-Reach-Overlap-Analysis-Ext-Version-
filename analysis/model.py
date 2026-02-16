@@ -40,11 +40,14 @@ When prompt starts with "--" please refine the text provided using the above inf
 def create_gemini_report(mu_data_csv, overlap_data_csv, prompt):
   #loading credentials for Gemini API call
   creds = get_gemini_api_key()
+  
+  if creds == "Key Not Found":
+      return "⚠️ **AI Report Error:** Gemini API Key not found in Streamlit Secrets. Please add GEMINI_API_KEY to your dashboard."
 
   client = genai.Client(api_key=creds)
 
   response = client.models.generate_content(
-    model="gemini-3-pro-preview",
+    model="gemini-1.5-pro",
     config=types.GenerateContentConfig(
         system_instruction=sys_instruct
     ),
@@ -55,11 +58,14 @@ def create_gemini_report(mu_data_csv, overlap_data_csv, prompt):
 def write_overlap_insights(overlap_data_csv, prompt):
   #loading credentials for Gemini API call
   creds = get_gemini_api_key()
+  
+  if creds == "Key Not Found":
+      raise ValueError("Gemini API Key missing. Please check Streamlit Secrets.")
 
   client = genai.Client(api_key=creds)
 
   response = client.models.generate_content(
-    model="gemini-3-pro-preview",
+    model="gemini-1.5-pro",
     config=types.GenerateContentConfig(
         system_instruction=sys_instruct,
         response_mime_type="application/json",
