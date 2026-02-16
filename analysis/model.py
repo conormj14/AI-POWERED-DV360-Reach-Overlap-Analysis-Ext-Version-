@@ -47,7 +47,7 @@ def create_gemini_report(mu_data_csv, overlap_data_csv, prompt):
   client = genai.Client(api_key=creds)
 
   response = client.models.generate_content(
-    model="gemini-1.5-pro",
+    model="gemini-2.0-flash",
     config=types.GenerateContentConfig(
         system_instruction=sys_instruct
     ),
@@ -65,7 +65,7 @@ def write_overlap_insights(overlap_data_csv, prompt):
   client = genai.Client(api_key=creds)
 
   response = client.models.generate_content(
-    model="gemini-1.5-pro",
+    model="gemini-2.0-flash",
     config=types.GenerateContentConfig(
         system_instruction=sys_instruct,
         response_mime_type="application/json",
