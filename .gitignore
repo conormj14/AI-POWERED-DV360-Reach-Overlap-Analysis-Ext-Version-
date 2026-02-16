@@ -5,3 +5,6 @@
 #ignoring client secrets file specifically
 dv_client_secrets.json
 token.pickle
+
+#scripts to ignore
+pickle_printer.py

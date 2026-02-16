@@ -10,6 +10,9 @@ import json
 from google.oauth2.credentials import Credentials
 
 
+import streamlit as st
+from google.oauth2 import service_account
+
 # --- CONFIGURATION ---
 # This scope allows for read and write access. Adjust if you only need read-only.
 #'https://www.googleapis.com/auth/display-video'
@@ -36,27 +39,52 @@ def authenticate():
     """Handles OAuth 2.0 authentication and returns an authorized service object."""
     creds = None
     
-    # The file token.pickle stores the user's access and refresh tokens.
-    if os.path.exists(TOKEN_PICKLE_FILE):
-        with open(TOKEN_PICKLE_FILE, 'rb') as token:
-            creds = pickle.load(token)
-            
-
-    # If there are no (valid) credentials available, let the user log in.
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
+    # 1. Check Streamlit Secrets (for Cloud Deployment)
+    try:
+        if "gcp_service_account" in st.secrets:
+            # If using a Service Account (highly recommended for servers)
+            creds = service_account.Credentials.from_service_account_info(
+                st.secrets["gcp_service_account"],
+                scopes=SCOPES
+            )
+        elif "google_oauth" in st.secrets:
+            # If using User OAuth (reconstructing from secrets)
+            creds = Credentials(
+                token=None,  # Will be refreshed
+                refresh_token=st.secrets["google_oauth"]["refresh_token"],
+                token_uri="https://oauth2.googleapis.com/token",
+                client_id=st.secrets["google_oauth"]["client_id"],
+                client_secret=st.secrets["google_oauth"]["client_secret"],
+                scopes=SCOPES
+            )
             creds.refresh(Request())
-            
-        else:
-            flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
-             # This generates the URL but does NOT try to open a browser.
-            flow.run_local_server()
-            #flow.run_console()
+    except Exception as e:
+        # If secrets aren't set up yet, we'll fall back to local files
+        pass
 
-            creds = flow.credentials
-        # Save the credentials for the next run
-        with open(TOKEN_PICKLE_FILE, 'wb') as token:
-            pickle.dump(creds, token)
+    # 2. Fallback to Local Files (for Local Development)
+    if not creds:
+        # The file token.pickle stores the user's access and refresh tokens.
+        if os.path.exists(TOKEN_PICKLE_FILE):
+            with open(TOKEN_PICKLE_FILE, 'rb') as token:
+                creds = pickle.load(token)
+                
+
+        # If there are no (valid) credentials available, let the user log in.
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+                
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
+                # This generates the URL but does NOT try to open a browser.
+                flow.run_local_server()
+                #flow.run_console()
+
+                creds = flow.credentials
+            # Save the credentials for the next run
+            with open(TOKEN_PICKLE_FILE, 'wb') as token:
+                pickle.dump(creds, token)
 
     # Build and return the dbm service object
     dbm_service = build(DBM_API_SERVICE_NAME, DBM_API_VERSION, credentials=creds)
