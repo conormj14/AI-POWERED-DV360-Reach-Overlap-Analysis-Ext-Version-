@@ -9,7 +9,8 @@ from datetime import datetime
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.express as px
-from pydantic import BaseModel, Field, List
+from typing import List
+from pydantic import BaseModel, Field
 
 
 def clean_weekly_reach_df(df):
