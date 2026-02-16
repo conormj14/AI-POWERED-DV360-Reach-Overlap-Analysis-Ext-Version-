@@ -7,6 +7,16 @@ from analysis.helpers import OverlapInsights
 
 
 
+import streamlit as st
+
+def get_gemini_api_key():
+    """Retrieves the Gemini API key from Streamlit secrets or environment variables."""
+    # 1. Check Streamlit Secrets (for Cloud Deployment)
+    if "GEMINI_API_KEY" in st.secrets:
+        return st.secrets["GEMINI_API_KEY"]
+    
+    # 2. Fallback to Environment Variables (for Local Development)
+    return os.environ.get("GEMINI_API_KEY", "Key Not Found")
 
 sys_instruct = f"""You are a highly experienced DV360 Specialist. You specialize in crafting and optimizing programmatic advertising strategies that directly drive incremental sales. You have a deep understanding of the digital advertising landscape.
 
@@ -28,8 +38,8 @@ When prompt starts with "--" please refine the text provided using the above inf
 #vd_data_csv,
 
 def create_gemini_report(mu_data_csv, overlap_data_csv, prompt):
-  #loading environment variables for Gemini API call
-  creds = os.environ.get("GEMINI_API_KEY", "Key Not Found")
+  #loading credentials for Gemini API call
+  creds = get_gemini_api_key()
 
   client = genai.Client(api_key=creds)
 
@@ -43,8 +53,8 @@ def create_gemini_report(mu_data_csv, overlap_data_csv, prompt):
   return response.text
 
 def write_overlap_insights(overlap_data_csv, prompt):
-  #loading environment variables for Gemini API call
-  creds = os.environ.get("GEMINI_API_KEY", "Key Not Found")
+  #loading credentials for Gemini API call
+  creds = get_gemini_api_key()
 
   client = genai.Client(api_key=creds)
 
