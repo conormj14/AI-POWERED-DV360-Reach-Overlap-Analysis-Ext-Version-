@@ -29,7 +29,7 @@
         "filters": [],
         "metrics": [
             "METRIC_REVENUE_ADVERTISER",
-            "METRIC_TOTAL_MEDIA_COST_ADVERTISER",
+            "METRIC_MEDIA_COST_ADVERTISER",
             "METRIC_PLATFORM_FEE_ADVERTISER",
             "METRIC_PLATFORM_FEE_RATE"
         ]  

@@ -69,7 +69,7 @@ def authenticate():
 
 
 
-
+'''
 def authenticate_v2():
     flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
     #This generates the URL but does NOT try to open a browser.
@@ -226,3 +226,4 @@ def get_credentials(self) -> Credentials:
         ) as token_file:
           token_file.write(credentials.to_json())
     return credentials
+'''

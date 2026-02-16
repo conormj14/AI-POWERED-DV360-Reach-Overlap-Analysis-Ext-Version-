@@ -5,12 +5,16 @@ import sys
 from googleapiclient.errors import HttpError
 from retry.api import retry_call
 #import util
-from config.authentication import authenticate, get_gcloud_token_and_creds, authenticate_v2
+from config.authentication import authenticate
 from pathlib import Path
 import json
 from googleapiclient.discovery import build
 #from googleapiclient.http import MediaIoBaseDownload
 import pandas as pd
+from ast import literal_eval
+
+from analysis.helpers import *
+from analysis.visualisations import *
 
 # The following values control retry behavior while the report is processing.
 # Minimum amount of time between polling requests. Defaults to 5 seconds.
@@ -182,8 +186,38 @@ def main(start_year, start_month, start_day, end_year, end_month, end_day, partn
         #dataframe_name = report_name + "_df"
         
         gcs_paths[report_name] = gcs_url_path
+    
+    
+    #print(gcs_paths)
 
-    print(gcs_paths)
+    #response_dict = ast.literal_eval(response_lst[-1])
+
+    dfs = {}
+
+    for report_name, gcs_path in gcs_paths.items():
+        df_name = report_name.split('.')[0] + '_df'
+        dfs[df_name] = pd.read_csv(gcs_path)
+
+    #cleaning dataframes    
+
+    dfs['weekly_reach_df'] = clean_weekly_reach_df(dfs['weekly_reach_df'])
+    
+    dfs['added_reach_df'] = clean_dataframe(dfs['added_reach_df'])
+    dfs['added_reach_df'] = set_dtypes(dfs['added_reach_df'])
+
+    dfs['spend_raw_df'] = clean_dataframe(dfs['spend_raw_df'])
+    dfs['spend_raw_df'] = set_dtypes(dfs['spend_raw_df'])
+
+    dfs['reach_overlap_df'] = clean_dataframe(dfs['reach_overlap_df'])
+    
+    dfs['exc_dup_reach_df'] = clean_dataframe(dfs['exc_dup_reach_df'])
+    dfs['exc_dup_reach_df'] = set_dtypes(dfs['exc_dup_reach_df'])
+
+    dfs['mu_df'] = create_mu_df(dfs['added_reach_df'], dfs['spend_raw_df'])
+    
+
+    
+    return dfs
 
 
 if __name__ == '__main__':
